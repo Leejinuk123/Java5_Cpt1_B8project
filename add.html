@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <title>팀원 등록 팝업!</title>
   <script src="js/addPost.js" type="module"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <style>
-
   /* 모달 스타일 */
   .modal {
     display: block;
@@ -149,6 +149,59 @@
     }
   }
 </style>
+<<<<<<< HEAD
+=======
+<script type="module">
+
+
+  // Firebase SDK 라이브러리 가져오기
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+  import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+  import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+
+  // Firebase 구성 정보 설정
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+      apiKey: "AIzaSyCz68dTzviPa72J4abFExTXIDUBLB8MlA8",
+      authDomain: "sparta-4dd3e.firebaseapp.com",
+      projectId: "sparta-4dd3e",
+      storageBucket: "sparta-4dd3e.appspot.com",
+      messagingSenderId: "402002439565",
+      appId: "1:402002439565:web:f09386156215670783e1c4",
+      measurementId: "G-KR8N0GR7C2"
+  };
+
+
+  // Firebase 인스턴스 초기화
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  //savebtn 누루면 input 값을 가져와서 db에 전송
+  $("#registerBtn").click(async function () {
+      let animalUrl = $('#animalUrl').val();
+      let animalName = $('#animalName').val();
+      let mbti = $('#mbti').val();
+      let advantage = $('#advantage').val();
+      let collaboration = $('#collaboration').val();
+      let blogUrl = $('#blogUrl').val();
+
+      let doc = {
+          'animalUrl': animalUrl,
+          'animalName': animalName,
+          'mbti': mbti,
+          'advantage': advantage,
+          'collaboration': collaboration,
+          'blogUrl': blogUrl,
+      };
+      const testDoc = await addDoc(collection(db, "zoo"), doc);
+      console.log(testDoc.id)
+      alert('저장 완료!');
+  })
+
+</script>
+>>>>>>> 194097b (디비연결)
 <body>
 
 <!-- 모달 열기 버튼 -->
@@ -203,8 +256,16 @@
     </form>
   </div>
 </div>
+<<<<<<< HEAD
 <script>
   const registerBtn = document.getElementById("registerBtn");
+=======
+
+
+<script>
+  //=========기존 진욱님 코드==============
+  //const registerBtn = document.getElementById("registerBtn");
+>>>>>>> 194097b (디비연결)
   const modal = document.getElementById("myModal");
   const closeBtn = document.getElementsByClassName("close")[0];
   const animalImg = document.getElementById("animalImg");
