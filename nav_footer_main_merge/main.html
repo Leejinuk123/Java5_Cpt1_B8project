@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>여기봐zoo</title>
+    <!-- 메인페이지 사진 애니메이션 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="nav.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <button onClick="gohome()" class="navbar-brand">
+                <img src="https://cdn.icon-icons.com/icons2/2091/PNG/512/home_icon_128501.png" alt="Bootstrap"
+                    width="30" height="24">
+            </button>
+        </div>
+        <!-- 홈버튼 스크립트 -->
+        <script>
+            function gohome() {
+                window.location.reload();
+            }
+        </script>
+        <!-- -------------------------------- -->
+        <div class="logo">
+            <img src="logo.png">
+        </div>
+        <div class="weather">
+            <ul>
+                <a class="av-link px-2 text-danger">오늘의 날씨 : <span id="todayweather"></span></a>
+            </ul>
+        </div>
+    </nav>
+    <div class="animate__animated animate__fadeIn"
+        style="display: flex; flex-direction: column; align-items: center; justify-content:center;">
+        <img src="mainPic.png" style="padding-top: 180px; width: 70%; height: 30%; left: 50%;">
+        <div class="mainPic_text">
+            <h1 class="main_h1">여기봐ZOO</h1>
+            <p class="p"> 코드만들어팔조의 팀원들을 소개하는 <br>동물원 컨셉의 블로그입니다</p>
+        </div>
+    </div>
+    <div class="box">
+        <div class="img_L1">
+            <img src="animal_kobitokaba.png">
+        </div>
+        <div class="box1_text">
+            <h1 class="h1">코드 만들어팔조</h1>
+            <p class="p">코드만들어팔조는 코드를 열심히 깎아 <br>장차 코드를 팔 팀원들이 모인 조입니다.</p>
+        </div>
+    </div>
+    <div class="box">
+        <div class="img_R">
+            <img src="bird_hayabusa.png">
+        </div>
+        <div class="box2_text">
+            <h1 class="h1">우리 팀만의 특징</h1>
+            <p class="p">성실하고 협업을 잘합니다.<br>그리고 다들 훌륭하신 품성을 가지고 계십니다!</p>
+        </div>
+    </div>
+    <div class="box">
+        <div class="img_L">
+            <img src="animal_kirin.png">
+        </div>
+        <div class="box3_text">
+            <h1 class="h1">궁극적인 목표</h1>
+            <p class="p">코드를 만들어 팔자!</p>
+        </div>
+
+    </div>
+    <div class="box">
+        <div class="img_R">
+            <img src="dog_dachshund_blacktan.png">
+        </div>
+        <div class="box4_text">
+            <h1 class="h1">팀의 약속</h1>
+            <p class="p">지각하지 않기 <br>일이 생겼을 땐 팀원들에게 미리 말하기<br>부정적인 말 금지(노홍철 되려고 노력하기)<br>자리 비울 땐 채팅 남기고 비우기</p>
+        </div>
+
+    </div>
+    <script src="mainAnimation.js"></script>
+    <footer class="underbar">
+        ©2024 copyright code8team
+    </footer>
+</body>
+
+</html>
