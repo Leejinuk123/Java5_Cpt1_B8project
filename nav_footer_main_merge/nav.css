@@ -18,19 +18,16 @@
 }
 
 .logo {
-    position: flex;
-    padding: auto;
-    text-align: center;
-    align-items: center;
+    
   }
 
 .weather {
     background-color: transparent;
-    width: auto;
-    position: right;
+    width :auto;
 }
 
 .underbar {
+    width: 100%;
     height: 190px;
     background-color: white;
 
