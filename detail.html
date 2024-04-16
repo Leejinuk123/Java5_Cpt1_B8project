@@ -7,7 +7,7 @@
 </head>
 <style>
   /* 모달 스타일 */
-  .modal {
+  .detailModal {
     display: block;
     position: fixed;
     z-index: 1000;
@@ -19,7 +19,7 @@
     background-color: rgba(0, 0, 0, 0.5);
   }
 
-  .modal-content {
+  .detailModal-content {
     background-color: #cccccc;
     margin: 2% auto 2% auto;
     /*margin-top: 2%;*/
@@ -37,7 +37,7 @@
     cursor: pointer;
   }
   /* 애니메이션 효과 */
-  .modal-content {
+  .detailModal-content {
     animation: zoomIn 0.3s;
   }
 
@@ -80,6 +80,7 @@
     right: 60px;
     border-radius: 5px;
     font-size: 20px;
+    border: 2px solid black;
   }
   .bottom-content button:nth-of-type(2){
     background-color: #ffffff;
@@ -88,22 +89,25 @@
     right: 10px;
     border-radius: 5px;
     font-size: 20px;
+    border: 2px solid black;
+  }
+  .bottom-content button:nth-of-type(1):hover{
+    background-color: #69b671;
+  }
+  .bottom-content button:nth-of-type(2):hover{
+    background-color: #d3d3d3;
   }
 </style>
 <body>
 
 <!-- 모달 열기 버튼 -->
-<button onclick="openModal()">동물 정보 입력</button>
-
-<!-- 모달 팝업을 담는 곳 -->
-<div id="modalContainer"></div>
-
+<button onclick="opendetailModal()">동물 정보 입력</button>
 
 <!-- 모달 팝업 -->
-<div id="myModal" class="modal">
+<div id="detailModal" class="detailModal">
 
   <!-- 모달 팝업 콘텐츠 -->
-  <div class="modal-content">
+  <div class="detailModal-content">
     <!-- 모달 닫기 버튼 -->
     <span class="close">&#128473;</span>
     <div class="top-content">
@@ -111,11 +115,11 @@
     </div>
     <div class="bottom-content">
       <div class="bottom-content-flexBox">
-        <div style="font-size: 30px">&#128630;<span>나는 오리 곽곽</span>&#128631;</div>
+        <div style="font-size: 30px">&#128630;<span>이진욱</span>&#128631;</div>
         <div><span>MBTI</span></div>
         <div><span>장점</span></div>
         <div><span>협업 스타일</span></div>
-        <div><a href="">블로그 주소</a></div>
+        <div><a href="" style="color: cornflowerblue">블로그 주소</a></div>
       </div>
       <button>&#128221;</button>
       <button>🗑️</button>
@@ -124,27 +128,27 @@
 
 </div>
 <script>
-  const modal = document.getElementById("myModal");
+  const detailModal = document.getElementById("detailModal");
   const closeBtn = document.getElementsByClassName("close")[0];
 
   // 모달 외부 클릭 시 닫기
   window.onclick = function (event) {
-    if (event.target === modal) {
-      closeModal();
+    if (event.target === detailModal) {
+      closedetailModal();
     }
   }
-  function openModal() {
-    modal.style.display = "block";
+  function opendetailModal() {
+    detailModal.style.display = "block";
   }
 
   // 모달 닫기
-  function closeModal() {
-    modal.style.display = "none";
+  function closedetailModal() {
+    detailModal.style.display = "none";
   }
 
   // 모달 닫기 버튼 클릭 이벤트
   closeBtn.onclick = function () {
-    closeModal();
+    closedetailModal();
   }
 
 </script>

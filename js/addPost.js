@@ -58,13 +58,13 @@
   console.log("Document written with ID: ", docRef.id);
   // 성공적으로 등록되었음을 사용자에게 알림
   alert("등록되었습니다!");
-  document.getElementById("animalForm").reset();
+  document.getElementById("addPostForm").reset();
 } catch (error) {
   console.error("Error adding document: ", error);
   // 오류가 발생했을 때 사용자에게 알림
   alert("등록 중 오류가 발생했습니다. 다시 시도해주세요.");
 }
   closeModal();
-
+  fetchData();
 
 });
