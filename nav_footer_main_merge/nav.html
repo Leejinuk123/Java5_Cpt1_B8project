@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="nav.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <button onClick="gohome()" class="navbar-brand">
+                <img src="https://cdn.icon-icons.com/icons2/2091/PNG/512/home_icon_128501.png" alt="Bootstrap"
+                    width="30" height="24">
+            </button>
+        </div>
+        <!-- 홈버튼 스크립트 -->
+        <script>
+            function gohome() {
+                window.location.reload();
+            }
+        </script>
+        <!-- -------------------------------- -->
+        <div class="logo">
+            <img src="logo.png">
+        </div>
+        <div class="weather">
+            <a class="av-link px-2 text-danger">오늘의 날씨 : <span id="todayweather"></span></a>
+        </div>
+    </nav>
+    <footer class="underbar">
+        ©2024 copyright code8team
+    </footer>
+</body>
+
+</html>
