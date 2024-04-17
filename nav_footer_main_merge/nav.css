@@ -9,7 +9,12 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+
+    position: fixed;
+    top: 0px;
+    z-index: 10;
 }
+
 
 .navbar-brand {
     background-color: transparent;
@@ -17,13 +22,9 @@
     border: none;
 }
 
-.logo {
-    
-  }
-
 .weather {
     background-color: transparent;
-    width :auto;
+    width: auto;
 }
 
 .underbar {
@@ -41,11 +42,6 @@
 
     position: relative;
     transform: translateY(0%);
-}
-
-.fdfd {
-    height: 300px;
-
 }
 
 .img {
