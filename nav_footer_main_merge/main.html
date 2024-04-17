@@ -559,7 +559,7 @@
               <div><span>${collaboration}</span></div>
               <div><a href="" style="color: cornflowerblue">${blogUrl}</a></div>
             </div>
-            <button id="editPostBtn">&#128221;</button>
+            <button id="editPostBtn" onclick="editPost('${pk})'">&#128221;</button>
             <button id="deletePostBtn" onclick="deletePost('${pk}')">🗑️</button>
           </div>
           </div>`
@@ -671,6 +671,7 @@
       console.error('Error deleting document:', error);
     }
   }
+
 
 </script>
 <script src="mainAnimation.js"></script>
