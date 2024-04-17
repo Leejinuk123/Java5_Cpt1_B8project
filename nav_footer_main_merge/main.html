@@ -149,7 +149,7 @@
     }
 
     /* 등록 버튼 스타일 */
-    #registerBtn {
+    .registerBtn {
       display: block;
       /*position: absolute;*/
       background-color: #4CAF50;
@@ -162,7 +162,7 @@
       margin: 5px auto;
     }
 
-    #registerBtn:hover {
+    .registerBtn:hover {
       background-color: #45a049;
     }
 
@@ -417,7 +417,6 @@
     <h1 class="h1">팀의 약속</h1>
     <p class="p">지각하지 않기 <br>일이 생겼을 땐 팀원들에게 미리 말하기<br>부정적인 말 금지(노홍철 되려고 노력하기)<br>자리 비울 땐 채팅 남기고 비우기</p>
   </div>
-
 </div>
 
 
@@ -494,7 +493,7 @@
             </div>
           </div>
           <!-- 등록 버튼 -->
-          <button type="button" id="registerBtn">등록하기!</button>
+          <button type="button" id="registerBtn" class="registerBtn">등록하기!</button>
         </form>
       </div>
     </div>
@@ -518,10 +517,7 @@
     <img src="add.png">
   </button>
 </div>
-<script src="../js/addPost.js" type="module"></script>
 <script>
-  //addPost.js
-  const registerBtn = document.getElementById("registerBtn");
   const addPostModal = document.getElementById("addPostModal");
   const closeAddPostBtn = document.getElementsByClassName("closeAddPost")[0];
   const animalImg = document.getElementById("animalImg");
@@ -540,8 +536,19 @@
   }
 
   function openAddPostModal() {
+    const registerBtn = document.getElementById("registerBtn");
+    console.log(animalName);
+    altText.style.display = "block";
+    document.getElementById("animalImg").src = "";
+    document.getElementById("animalUrl").value = "";
+    document.getElementById("animalName").value = "";
+    document.getElementById("mbti").value = "";
+    document.getElementById("advantage").value = "";
+    document.getElementById("collaboration").value = "";
+    document.getElementById("blogUrl").value = "";
+    document.getElementsByClassName("registerBtn")[0].id = "registerBtn";
+    document.getElementsByClassName("registerBtn")[0].innerText = "등록하기!";
     addPostModal.style.display = "block";
-    // detailModal.style.display = "block";
     document.body.classList.add("Modal-open");
   }
 
@@ -593,7 +600,7 @@
               <div><span>${collaboration}</span></div>
               <div><a href="" style="color: cornflowerblue">${blogUrl}</a></div>
             </div>
-            <button id="editPostBtn">&#128221;</button>
+            <button id="editPostBtn" onclick="editPost('${pk}','${animalUrl}','${animalName}','${mbti}','${advantage}','${collaboration}','${blogUrl}')">&#128221;</button>
             <button id="deletePostBtn" onclick="deletePost('${pk}')">🗑️</button>
           </div>
           </div>`
@@ -617,12 +624,47 @@
     await processData();
   });
 
+  registerBtn.addEventListener("click", async function (){
+    try {
+      const Url = "https://firestore.googleapis.com/v1/projects/miniproject-739f0/databases/(default)/documents/postProfile"
+      const newData = {
+        fields: {
+          advantage: { stringValue: document.getElementById("advantage").value },
+          animalUrl: { stringValue: document.getElementById("animalUrl").value },
+          animalName: { stringValue: document.getElementById("animalName").value },
+          blogUrl: { stringValue: document.getElementById("blogUrl").value },
+          collaboration: { stringValue: document.getElementById("collaboration").value },
+          mbti: { stringValue: document.getElementById("mbti").value }
+        }
+      };
+      const response = await fetch(Url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ fields: newData.fields })
+      });
+
+      if (!response.ok) {
+        throw new Error("Firestore API 요청 실패");
+      }
+
+      const createdDocument = await response.json();
+      console.log("새로운 문서 생성 성공:", createdDocument);
+      closeModal();
+      await processData();
+    } catch (error) {
+      console.error("새로운 문서 생성 에러:", error);
+    }
+  })
+
+
   //데이터를 가져와서 카드를 만들어주는 함수.
   async function processData() {
     try {
       const data = await fetchData();
       if (data) {
-        makeCard(data);
+        await makeCard(data);
       } else {
         console.log("데이터를 가져올 수 없습니다.");
       }
@@ -657,7 +699,6 @@
     memberCard.innerHTML = "";
 
     data.documents.forEach((item, index) => {
-      console.log(index);
       const animalUrl = item.fields.animalUrl.stringValue;
       const animalName = item.fields.animalName.stringValue;
       const primaryKey = item.name;
@@ -681,9 +722,6 @@
 
   // deletePost 함수에서 Firestore 문서 삭제하기
   async function deletePost(pk) {
-    console.log(pk);
-    // const projectId = 'miniproject-739f0';
-    // const collectionName = 'postProfile';
     const url = `https://firestore.googleapis.com/v1/${pk}`;
 
     try {
@@ -693,7 +731,6 @@
           'Content-Type': 'application/json'
         }
       });
-
       if (!response.ok) {
         throw new Error('Failed to delete document');
       }
@@ -706,6 +743,62 @@
     }
   }
 
+  async function updatePost(pk,newData) {
+    try {
+      const url = `https://firestore.googleapis.com/v1/${pk}`;
+      // Firestore 문서 업데이트 함수
+
+      const response = await fetch(url, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newData)
+      });
+
+      if (!response.ok) {
+        throw new Error("Firestore API 요청 실패");
+      }
+
+      const updatedDocument = await response.json();
+      console.log("문서 업데이트 성공:", updatedDocument);
+      await deletePost(updatedDocument.name);
+    } catch (error) {
+      console.error("문서 업데이트 에러:", error);
+    }
+  }
+
+  async function editPost(pk,animalUrl,animalName,mbti,advantage,collaboration,blogUrl){
+    closeModal();
+    openAddPostModal();
+    altText.style.display = "none";
+    document.getElementById("animalImg").src = animalUrl;
+    document.getElementById("animalUrl").value = animalUrl;
+    document.getElementById("animalName").value = animalName;
+    document.getElementById("mbti").value = mbti;
+    document.getElementById("advantage").value = advantage;
+    document.getElementById("collaboration").value = collaboration;
+    document.getElementById("blogUrl").value = blogUrl;
+    document.getElementsByClassName("registerBtn")[0].id = "editBtn";
+    document.getElementsByClassName("registerBtn")[0].innerText = "수정하기!";
+
+    const editBtn = document.getElementById("editBtn");
+    editBtn.addEventListener("click",async function () {
+      console.log("수정버튼이 눌림");
+      const newData = {
+        fields: {
+          advantage: {stringValue: document.getElementById("advantage").value},
+          animalUrl: {stringValue: document.getElementById("animalUrl").value},
+          animalName: {stringValue: document.getElementById("animalName").value},
+          blogUrl: {stringValue: document.getElementById("blogUrl").value},
+          collaboration: {stringValue: document.getElementById("collaboration").value},
+          mbti: {stringValue: document.getElementById("mbti").value}
+        }
+      };
+      await updatePost(pk, newData);
+    });
+
+  }
 </script>
 <script src="mainAnimation.js"></script>
 <footer class="underbar">
