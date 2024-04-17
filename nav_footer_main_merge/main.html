@@ -5,7 +5,6 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>여기봐zoo</title>
-  <!-- 메인페이지 사진 애니메이션 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="stylesheet" href="main.css">
   <link rel="stylesheet" href="nav.css">
@@ -328,13 +327,50 @@
             function gohome() {
                 window.location.reload();
             }
+
+            // 위도lat, 경도lon 받아오기
+            navigator.geolocation.getCurrentPosition((position) => {
+              //   console.log(position)
+              let lat = position.coords.latitude;
+              let lon = position.coords.longitude;
+              const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=609f1c04709ed695f0e8dd243042f819` //&lang=kr
+              fetch(url).then(res => res.json()).then(data => {
+                let area = data["name"];
+                let temp = data.main["temp"]
+                let weather = data.weather[0]["main"]
+
+                if (weather=="Thunderstorm") {
+                  $("#todayweather").text(" " + "동물원은 다음에" + " " + temp);
+                  $("#image").attr("src","thunderstorm.png");
+                } else if(weather=="Drizzle"){
+                  $("#todayweather").text(" " + "동물원은 다음에" + " " + temp);
+                  $("#image").attr("src","drizzle.png");
+                } else if(weather=="Rain"){
+                  $("#todayweather").text(" " + "동물원은 다음에" + " " + temp);
+                  $("#image").attr("src","rain.png");
+                } else if(weather=="Snow"){
+                  $("#todayweather").text(" " + "동물원에 눈이내려요" + " " + temp);
+                  $("#image").attr("src","snow.png");
+                } else if(weather=="Clear"){
+                  $("#todayweather").text(" " + "동물원가기 좋은날" + " " + temp);
+                  $("#image").attr("src","clear.png");
+                } else if(weather=="Clouds"){
+                  $("#todayweather").text(" " + "동물원가기 좋은날" + " " + temp);
+                  $("#image").attr("src","clouds.png");
+                } else {
+                  //Atmosphere 안개 먼지 등등
+                  $("#todayweather").text(" " + "동물원은 다음에" + " " + temp);
+                  $("#image").attr("src","atmosphere.png");
+                }
+                //console.log(data);
+              })
+            });
         </script>
-        <!-- -------------------------------- -->
-        <div class="logo">
+        <div class="logo"  style="display: flex; flex-direction: column; align-items: center; justify-content:center;">
             <img src="logo.png">
         </div>
         <div class="weather">
-                <a class="av-link px-2 text-danger">오늘의 날씨 : <span id="todayweather"></span></a>
+                <a class="av-link px-2 text-danger"><img id="image" src="clear.png"><span id="todayweather"></span>°C</a>
         </div>
     </nav>
     <div class="animate__animated animate__fadeIn"
@@ -410,7 +446,7 @@
             <div><span>협업 스타일</span></div>
             <div><a href="" style="color: cornflowerblue">블로그 주소</a></div>
           </div>
-          <button>&#128221;</button>
+          <button onclick="closeModal()">&#128221;</button>
           <button>🗑️</button>
         </div>
       </div>
