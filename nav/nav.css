@@ -1,0 +1,59 @@
+.navbar {
+    width: 100%;
+    height: 50px;
+
+    background-color: white;
+    /*네비게이션 바 이미지*/
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.navbar-brand {
+    background-color: transparent;
+    height: 45px;
+    border: none;
+}
+
+.logo {
+    position: flex;
+    padding: auto;
+    text-align: center;
+    align-items: center;
+  }
+
+.weather {
+    background-color: transparent;
+    width: auto;
+    position: right;
+}
+
+.underbar {
+    height: 190px;
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding-bottom: 20px;
+
+
+    position: relative;
+    transform: translateY(0%);
+}
+
+.fdfd {
+    height: 300px;
+
+}
+
+.img {
+    background-color: green;
+    width: 100%;
+    height: 50px;
+
+}
