@@ -56,15 +56,18 @@
 
 .updatePostIt{
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .imtext {
     position: absolute;
-    top: 90px;
-    left: 80px;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
     z-index: 1;
     color: black;
-    width: 120px;
     text-align: center;
 }
 
