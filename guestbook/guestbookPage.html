@@ -6,29 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="guestbookPage.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        function makeCard() {
-            let Name = $('Name').val();
-            let Password = $('Password').val();
-            let Content = $('Content').val();
-
-            let temp_html = `
-            <div class="registeredPostIt" id="registeredPostIt">
-                        <img src="postIt.png">
-                        <div class="registeredBtn">
-                            <button type="button" class="deleteBtn"
-                                onclick="passwordPrompt()">🗑️</button>
-                            <button type="button" class="modifyBtn" onclick="passwordPrompt()"> ✏️ </button>
-                        </div>
-                        <span class="imtext">
-                            <p class = "registeredContent">${Content}</p>
-                            <p class = "registeredName">${Name}</p>
-                        </span>
-                    </div>`;
-                    $('#registeredPostIt').append(temp_html);
-        }
-    </script>
-
+    <script src="prompt.js"></script>
+    <script src="postfx.js"></script>
 </head>
 
 <body>
@@ -50,46 +29,15 @@
         <!-- --------------------------------------- -->
 
         <!-- -----------------포스트잇-------------------->
-        <container class="guestbookMain">
+        <container class="guestbookMain" id="guestbookMain">
             <div class="whole">
-                <div class="pic">
-                    <!-- 업데이트폼 포스트잇 -->
-                    <div class="updatePostIt">
-                        <img src="postIt.png">
-                        <div class="updateBtn">
-                            <button type="button" class="registerBtn" onclick="registerConfirm(); makeCard();">✅</button>
-                            <button type="button" class="cancelBtn" onclick="cancelConfirm()">❌</button>
-                            <script src="prompt.js"></script>
-                        </div>
-                        <span class="imtext">
-                            <input type="text" class = "Name" id="Name" placeholder="이름">
-                            <input type="text" class = "Password" id="Password" placeholder="패스워드">
-                            <input type="text" class = "Content" id="Content"  placeholder="내용">
-                        </span>
-                    </div>
-
-                    <!-- 이미 등록된 포스트잇 -->
-                    <div class="registeredPostIt" id="registeredPostIt">
-                        <img src="postIt.png">
-                        <div class="registeredBtn">
-                            <button type="button" class="deleteBtn"
-                                onclick="passwordPrompt()">🗑️</button>
-                            <button type="button" class="modifyBtn" onclick="passwordPrompt()"> ✏️ </button>
-                        </div>
-                        <span class="imtext">
-                            <p class = "registeredContent">내용</p>
-                            <p class = "registeredName">내용</p>
-                        </span>
-                    </div>
-
+                <div class="pic" id="picjs">
                     <!-- 추가버튼 포스트잇 -->
                     <div class="addPostIt">
                         <img src="postIt.png">
-                        <button type="button" class="addBtn"><img src="add.png">
+                        <button type="button" class="addBtn" onclick="addForm();"><img src="add.png">
                         </button>
                     </div>
-
-
                 </div>
             </div>
         </container>
