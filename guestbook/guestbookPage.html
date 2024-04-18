@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="guestbookPage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="guestbookBody">
+        <!-- -----------------가랜드-------------------->
+        <div class="garland">
+            <h1>
+                <img src="garland.png">
+            </h1>
+        </div>
+        <!-- --------------------------------------- -->
+
+        <!-- -----------------메인 텍스트-------------------->
+
+        <div class="guestbookText">
+            <div class="HeadText1">여기봐zoo 방명록</div>
+            <div class="text1">코드만들어팔조에게 8글자로 방명록을 남겨주세요</div>
+        </div>
+        <!-- --------------------------------------- -->
+
+        <!-- -----------------포스트잇-------------------->
+        <container class="guestbookMain">
+            <div class="whole">
+                <div class="pic">
+                    <!-- 업데이트폼 포스트잇 -->
+                    <div class="updatePostIt">
+                        <img src="postIt.png">
+                        <div class="updateBtn">
+                            <button type="button" class="registerBtn" onclick="registerConfirm()">✅</button>
+                            <button type="button" class="cancelBtn" onclick="cancelConfirm()">❌</button>
+                            <script src="prompt.js"></script>
+                        </div>
+                        <span class="imtext">
+                            <input type="text" id="Name" name="Name" placeholder="이름" autocomplete="off" required>
+                            <input type="text" id="Password" name="Password" placeholder="패스워드" autocomplete="off"
+                                required>
+                            <input type="text" id="Content" name="Content" placeholder="내용" autocomplete="off" required>
+                        </span>
+                    </div>
+
+                    <!-- 이미 등록된 포스트잇 -->
+                    <div class="registeredPostIt" id="registeredPostIt">
+                        <img src="postIt.png">
+                        <div class="registeredBtn">
+                            <button type="button" id="#deleteBtn" class="deleteBtn"
+                                onclick="passwordPrompt()">🗑️</button>
+                            <button type="button" class="modifyBtn" onclick="passwordPrompt()"> ✏️ </button>
+                        </div>
+                        <span class="imtext">
+                            <div><span>내용</span></div>
+                            <div><span>이름</span></div>
+                        </span>
+                    </div>
+
+                    <!-- 추가버튼 포스트잇 -->
+                    <div class="addPostIt">
+                        <img src="postIt.png">
+                        <button type="button" class="addBtn"><img src="add.png">
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </container>
+        <!-- --------------------------------------- -->
+
+        <!-- -----------------잔디-------------------->
+        <div class="grass">
+            <!-- <img
+                src="C:\Users\최유진\Desktop\line_mountain_yama.png"> -->
+        </div>
+        <!-- --------------------------------------- -->
+    </div>
+</body>
+
+</html>
