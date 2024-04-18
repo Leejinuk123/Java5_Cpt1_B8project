@@ -5,6 +5,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>여기봐zoo</title>
+  <!-- 메인페이지 사진 애니메이션 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="stylesheet" href="main.css">
   <link rel="stylesheet" href="nav.css">
@@ -18,6 +19,7 @@
     .main {
       text-align: center;
       margin: 30px auto 30px auto;
+      width: 100%;
     }
 
     .addPostModalBtn {
@@ -290,7 +292,8 @@
       margin-top: 50px;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
+      /*justify-content: space-around;*/
+      justify-content: space-evenly;
     }
 
     .card {
@@ -315,99 +318,101 @@
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <button onClick="gohome()" class="navbar-brand">
-                <img src="https://cdn.icon-icons.com/icons2/2091/PNG/512/home_icon_128501.png" alt="Bootstrap"
-                    width="30" height="24">
-            </button>
-        </div>
-        <!-- 홈버튼 스크립트 -->
-        <script>
-            function gohome() {
-                window.location.reload();
-            }
+<nav class="navbar">
+  <div class="container">
+    <button onClick="gohome()" class="navbar-brand">
+      <img src="https://cdn.icon-icons.com/icons2/2091/PNG/512/home_icon_128501.png" alt="Bootstrap"
+           width="30" height="24">
+    </button>
+  </div>
+  <!-- 홈버튼 스크립트 -->
+  <script>
+    function gohome() {
+      window.location.reload();
+    }
 
-            // 위도lat, 경도lon 받아오기
-            navigator.geolocation.getCurrentPosition((position) => {
-              //   console.log(position)
-              let lat = position.coords.latitude;
-              let lon = position.coords.longitude;
-              const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=609f1c04709ed695f0e8dd243042f819` //&lang=kr
-              fetch(url).then(res => res.json()).then(data => {
-                let area = data["name"];
-                let temp = data.main["temp"]
-                let weather = data.weather[0]["main"]
+    // 위도lat, 경도lon 받아오기
+    navigator.geolocation.getCurrentPosition((position) => {
+      //   console.log(position)
+      let lat = position.coords.latitude;
+      let lon = position.coords.longitude;
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=609f1c04709ed695f0e8dd243042f819` //&lang=kr
+      fetch(url).then(res => res.json()).then(data => {
+        let area = data["name"];
+        let temp = data.main["temp"]
+        let weather = data.weather[0]["main"]
 
-                if (weather=="Thunderstorm") {
-                  $("#todayweather").text(" " + "동물원은 다음에" + " " + temp);
-                  $("#image").attr("src","thunderstorm.png");
-                } else if(weather=="Drizzle"){
-                  $("#todayweather").text(" " + "동물원은 다음에" + " " + temp);
-                  $("#image").attr("src","drizzle.png");
-                } else if(weather=="Rain"){
-                  $("#todayweather").text(" " + "동물원은 다음에" + " " + temp);
-                  $("#image").attr("src","rain.png");
-                } else if(weather=="Snow"){
-                  $("#todayweather").text(" " + "동물원에 눈이내려요" + " " + temp);
-                  $("#image").attr("src","snow.png");
-                } else if(weather=="Clear"){
-                  $("#todayweather").text(" " + "동물원가기 좋은날" + " " + temp);
-                  $("#image").attr("src","clear.png");
-                } else if(weather=="Clouds"){
-                  $("#todayweather").text(" " + "동물원가기 좋은날" + " " + temp);
-                  $("#image").attr("src","clouds.png");
-                } else {
-                  //Atmosphere 안개 먼지 등등
-                  $("#todayweather").text(" " + "동물원은 다음에" + " " + temp);
-                  $("#image").attr("src","atmosphere.png");
-                }
-                //console.log(data);
-              })
-            });
-        </script>
-        <div class="logo"  style="display: flex; flex-direction: column; align-items: center; justify-content:center;">
-            <img src="logo.png">
-        </div>
-        <div class="weather">
-                <a class="av-link px-2 text-danger"><img id="image" src="clear.png"><span id="todayweather"></span>°C</a>
-        </div>
-    </nav>
-    <div class="animate__animated animate__fadeIn"
-        style="display: flex; flex-direction: column; align-items: center; justify-content:center;">
-        <img src="mainPic.png" style="padding-top: 180px; width: 70%; height: 30%; left: 50%;">
-        <div class="mainPic_text">
-            <h1 class="main_h1">여기봐ZOO</h1>
-            <p class="p"> 코드만들어팔조의 팀원들을 소개하는 <br>동물원 컨셉의 블로그입니다</p>
-        </div>
-    </div>
-    <div class="box">
-        <div class="img_L1">
-            <img src="animal_kobitokaba.png">
-        </div>
-        <div class="box1_text">
-            <h1 class="h1">코드 만들어팔조</h1>
-            <p class="p">코드만들어팔조는 코드를 열심히 깎아 <br>장차 코드를 팔 팀원들이 모인 조입니다.</p>
-        </div>
-    </div>
-    <div class="box">
-        <div class="img_R">
-            <img src="bird_hayabusa.png">
-        </div>
-        <div class="box2_text">
-            <h1 class="h1">우리 팀만의 특징</h1>
-            <p class="p">성실하고 협업을 잘합니다.<br>그리고 다들 훌륭하신 품성을 가지고 계십니다!</p>
-        </div>
-    </div>
-    <div class="box">
-        <div class="img_L">
-            <img src="animal_kirin.png">
-        </div>
-        <div class="box3_text">
-            <h1 class="h1">궁극적인 목표</h1>
-            <p class="p">코드를 만들어 팔자!</p>
-        </div>
-
+        if (weather=="Thunderstorm") {
+          $("#todayweather").text(" " + "동물원은 다음에" + " " + temp);
+          $("#image").attr("src","thunderstorm.png");
+        } else if(weather=="Drizzle"){
+          $("#todayweather").text(" " + "동물원은 다음에" + " " + temp);
+          $("#image").attr("src","drizzle.png");
+        } else if(weather=="Rain"){
+          $("#todayweather").text(" " + "동물원은 다음에" + " " + temp);
+          $("#image").attr("src","rain.png");
+        } else if(weather=="Snow"){
+          $("#todayweather").text(" " + "동물원에 눈이내려요" + " " + temp);
+          $("#image").attr("src","snow.png");
+        } else if(weather=="Clear"){
+          $("#todayweather").text(" " + "동물원가기 좋은날" + " " + temp);
+          $("#image").attr("src","clear.png");
+        } else if(weather=="Clouds"){
+          $("#todayweather").text(" " + "동물원가기 좋은날" + " " + temp);
+          $("#image").attr("src","clouds.png");
+        } else {
+          //Atmosphere 안개 먼지 등등
+          $("#todayweather").text(" " + "동물원은 다음에" + " " + temp);
+          $("#image").attr("src","atmosphere.png");
+        }
+        //console.log(data);
+      })
+    });
+  </script>
+  <!-- -------------------------------- -->
+  <div class="logo">
+    <img src="logo.png">
+  </div>
+  <div class="weather">
+    <ul>
+      <a class="av-link px-2 text-danger"><img id="image" src="clear.png"><span id="todayweather" class="p"></span>°C</a>
+    </ul>
+  </div>
+</nav>
+<div class="animate__animated animate__fadeIn"
+     style="display: flex; flex-direction: column; align-items: center; justify-content:center;">
+  <img src="mainPic.png" style="padding-top: 180px; width: 70%; height: 30%; left: 50%;">
+  <div class="mainPic_text">
+    <h1 class="main_h1">여기봐ZOO</h1>
+    <p class="p"> 코드만들어팔조의 팀원들을 소개하는 <br>동물원 컨셉의 블로그입니다</p>
+  </div>
+</div>
+<div class="box">
+  <div class="img_L1">
+    <img src="animal_kobitokaba.png">
+  </div>
+  <div class="box1_text">
+    <h1 class="h1">코드 만들어팔조</h1>
+    <p class="p">코드만들어팔조는 코드를 열심히 깎아 <br>장차 코드를 팔 팀원들이 모인 조입니다.</p>
+  </div>
+</div>
+<div class="box">
+  <div class="img_R">
+    <img src="bird_hayabusa.png">
+  </div>
+  <div class="box2_text">
+    <h1 class="h1">우리 팀만의 특징</h1>
+    <p class="p">성실하고 협업을 잘합니다.<br>그리고 다들 훌륭하신 품성을 가지고 계십니다!</p>
+  </div>
+</div>
+<div class="box">
+  <div class="img_L">
+    <img src="animal_kirin.png">
+  </div>
+  <div class="box3_text">
+    <h1 class="h1">궁극적인 목표</h1>
+    <p class="p">코드를 만들어 팔자!</p>
+  </div>
 </div>
 <div class="box">
   <div class="img_R">
@@ -445,7 +450,7 @@
             <div><span>협업 스타일</span></div>
             <div><a href="" style="color: cornflowerblue">블로그 주소</a></div>
           </div>
-          <button onclick="closeModal()">&#128221;</button>
+          <button>&#128221;</button>
           <button>🗑️</button>
         </div>
       </div>
@@ -598,7 +603,7 @@
               <div><span>${mbti}</span></div>
               <div><span>${advantage}</span></div>
               <div><span>${collaboration}</span></div>
-              <div><a href="" style="color: cornflowerblue">${blogUrl}</a></div>
+              <div><a href="${blogUrl}" style="color: cornflowerblue">블로그 주소</a></div>
             </div>
             <button id="editPostBtn" onclick="editPost('${pk}','${animalUrl}','${animalName}','${mbti}','${advantage}','${collaboration}','${blogUrl}')">&#128221;</button>
             <button id="deletePostBtn" onclick="deletePost('${pk}')">🗑️</button>
@@ -720,55 +725,7 @@
     });
   }
 
-  // deletePost 함수에서 Firestore 문서 삭제하기
-  async function deletePost(pk) {
-    const url = `https://firestore.googleapis.com/v1/${pk}`;
-
-    try {
-      const response = await fetch(url, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      if (!response.ok) {
-        throw new Error('Failed to delete document');
-      }
-
-      console.log('Document deleted successfully');
-      closeModal();
-      await processData();
-    } catch (error) {
-      console.error('Error deleting document:', error);
-    }
-  }
-
-  async function updatePost(pk,newData) {
-    try {
-      const url = `https://firestore.googleapis.com/v1/${pk}`;
-      // Firestore 문서 업데이트 함수
-
-      const response = await fetch(url, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(newData)
-      });
-
-      if (!response.ok) {
-        throw new Error("Firestore API 요청 실패");
-      }
-
-      const updatedDocument = await response.json();
-      console.log("문서 업데이트 성공:", updatedDocument);
-      await deletePost(updatedDocument.name);
-    } catch (error) {
-      console.error("문서 업데이트 에러:", error);
-    }
-  }
-
-  async function editPost(pk,animalUrl,animalName,mbti,advantage,collaboration,blogUrl){
+  function editPost(pk,animalUrl,animalName,mbti,advantage,collaboration,blogUrl){
     closeModal();
     openAddPostModal();
     altText.style.display = "none";
@@ -797,7 +754,54 @@
       };
       await updatePost(pk, newData);
     });
+  }
 
+  async function updatePost(pk,newData) {
+    try {
+      const url = `https://firestore.googleapis.com/v1/${pk}`;
+      // Firestore 문서 업데이트 함수
+
+      const response = await fetch(url, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newData)
+      });
+
+      if (!response.ok) {
+        throw new Error("Firestore API 요청 실패");
+      }
+
+      const updatedDocument = await response.json();
+      console.log("문서 업데이트 성공:", updatedDocument);
+      await deletePost(updatedDocument.name);
+    } catch (error) {
+      console.error("문서 업데이트 에러:", error);
+    }
+  }
+
+  // deletePost 함수에서 Firestore 문서 삭제하기
+  async function deletePost(pk) {
+    const url = `https://firestore.googleapis.com/v1/${pk}`;
+
+    try {
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete document');
+      }
+
+      console.log('Document deleted successfully');
+      closeModal();
+      await processData();
+    } catch (error) {
+      console.error('Error deleting document:', error);
+    }
   }
 </script>
 <script src="mainAnimation.js"></script>
