@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>포스트잇 방명록!</title>
+</head>
+<style>
+  .guestBook {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .guestBook-content {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 0 auto
+  }
+
+  .addPostIt, .viewPostIt, .editPostIt {
+    flex: 0 0 250px;
+    height: 250px;
+    margin-top: 25px;
+    background-color: #FFD2E2
+  }
+
+  .addPostIt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .addPostItBtn {
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 15px;
+    font-size: 35px
+  }
+</style>
+<body>
+<div class="guestBook">
+
+  <div class="guestBook-top" style="width: 80%; text-align: center;margin: 0 auto">
+    <div><span style="font-size: 45px; display: block;">여기봐 ZOO 방명록</span></div>
+    <div><span style="font-size: 20px; display: block;">코드만들어팔조에게 8글자로 방명록을 남겨주세요! ╰(*°▽°*)╯</span></div>
+  </div>
+
+  <div class="guestBook-content">
+
+    <!--    <div class="editPostIt">-->
+    <!--      <button class="checkBtn" id="checkBtn">✔️</button>-->
+    <!--      <button class="cancelBtn" id="cancelBtn">❌</button>-->
+    <!--      <div><input type="text" placeholder="이름" id="name"></div>-->
+    <!--      <div><input type="text" placeholder="비밀번호" id="password"></div>-->
+    <!--      <div><input type="text" placeholder="내용" id="content"></div>-->
+    <!--    </div>-->
+
+<!--        <div class="viewPostIt">-->
+<!--          <button class="editBtn">✏️</button>-->
+<!--          <button class="cancelBtn">❌</button>-->
+<!--          <div><span>내용</span></div>-->
+<!--          <div>-<span>이름</span>-</div>-->
+<!--        </div>-->
+
+    <div class="addPostIt">
+      <button class="addPostItBtn"
+              onclick="addPostIt()">+
+      </button>
+    </div>
+
+  </div>
+
+  <div class="guestBook-bottom">
+
+  </div>
+
+</div>
+<script>
+  // // Firestore URL
+  const endPointUrl = "https://firestore.googleapis.com/v1";
+  const baseUrl = "https://firestore.googleapis.com/v1/projects/miniproject-739f0/databases/(default)/documents/guestBook";
+
+  const guestBook_content = document.getElementsByClassName("guestBook-content")[0];
+
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("2");
+    reloadPostIt();
+  });
+
+  function reloadPostIt() {
+    guestBook_content.innerHTML = `<div class="addPostIt">
+      <button class="addPostItBtn"
+              onclick="addPostIt()">+
+      </button>
+    </div>`;
+    // 모든 삭제가 완료된 후에 displayAllPostIt() 함수를 호출
+    displayAllPostIt();
+  }
+
+  async function displayAllPostIt() {
+    let data = await getData();
+    console.log(data);
+    data.documents.forEach(doc => {
+      // console.log(doc);
+      let name = doc.fields.name.stringValue;
+      // let password = doc.fields.password.stringValue;
+      let content = doc.fields.content.stringValue;
+      let pk = doc.name;
+      let template = `
+        <div class="viewPostIt">
+          <button class="editBtn" onclick="editPostIt('${pk}')">✏️</button>
+          <button class="cancelBtn" onclick="deletePostIt('${pk}')">❌</button>
+          <div><span>${content}</span></div>
+          <div>-<span>${name}</span>-</div>
+        </div>`
+      guestBook_content.insertAdjacentHTML('afterbegin',template);
+    })
+  }
+
+  // 데이터 가져오기
+  async function getData() {
+    try {
+      const response = await fetch(baseUrl);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      let data = await response.json();
+      console.log("데이터를 가져왔습니다!", data);
+      return data;
+    } catch (error) {
+      console.error('Error:', error);
+      throw error; // 에러를 다시 throw하여 이후에 처리할 수 있도록 함
+    }
+  }
+
+  //포스트잇 추가하기
+  let isAlreadyAddPostIt = false;
+  function addPostIt() {
+    if (!isAlreadyAddPostIt) {
+      isAlreadyAddPostIt = true;
+      let addPostItForm = ` <div class="editPostIt">
+      <button class="checkBtn" id="checkBtn">✔️</button>
+      <button class="cancelBtn" id="cancelBtn">❌</button>
+      <div><input type="text" placeholder="이름" id="name"></div>
+      <div><input type="text" placeholder="비밀번호" id="password"></div>
+      <div><input type="text" placeholder="내용" id="content"></div>
+    </div>`;
+
+      let addPostIt = document.getElementsByClassName("addPostIt")[0];
+      addPostIt.insertAdjacentHTML('beforebegin', addPostItForm);
+
+      let editPostItForms = Array.from(document.getElementsByClassName("editPostIt"));
+
+      editPostItForms.forEach(editPostItForm => {
+        let checkBtn = editPostItForm.querySelector("#checkBtn");
+
+        checkBtn.addEventListener("click",
+          async function () {
+            let name = editPostItForm.querySelector("#name").value;
+            let password = editPostItForm.querySelector("#password").value;
+            let content = editPostItForm.querySelector("#content").value;
+
+            // console.log(name, password, content);
+            await addData(name, password, content);
+            console.log("1");
+            isAlreadyAddPostIt = false;
+          })
+      })
+    }
+  }
+
+  // 데이터 추가
+  function addData(name, password, content) {
+    const data = {
+      name: {stringValue: name},
+      password: {stringValue: password},
+      content: {stringValue: content}
+    };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({fields: data})
+    };
+
+    fetch(baseUrl, requestOptions)
+      .then(response => response.json())
+      .then(async data => {
+        console.log(data);
+        await reloadPostIt();
+      })
+      .catch(error => console.error('Error:', error));
+  }
+
+  // async function editPostIt(pk){
+  //   await updateData(pk);
+  // }
+
+  // // // 데이터 수정
+  // function updateData(documentId, newData) {
+  //   const url = `${baseUrl}/${documentId}`;
+  //
+  //   const requestOptions = {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({fields: newData})
+  //   };
+  //
+  //   fetch(url, requestOptions)
+  //     .then(response => response.json())
+  //     .then(data => console.log(data))
+  //     .catch(error => console.error('Error:', error));
+  // }
+
+  async function deletePostIt(pk){
+    await deleteData(pk);
+  }
+
+  // 데이터 삭제-->
+  function deleteData(pk) {
+    const url = `${endPointUrl}/${pk}`;
+
+    const requestOptions = {
+      method: 'DELETE',
+    };
+
+    fetch(url, requestOptions)
+      .then(async response => {
+        console.log('Data deleted successfully');
+        await reloadPostIt();
+      })
+      .catch(error => console.error('Error:', error));
+  }
+</script>
+</body>
+</html>
