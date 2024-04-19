@@ -21,6 +21,8 @@
     font-style: normal;
   }
 
+
+
   .garland {
     width: 100%;
     height: 100%;
@@ -69,7 +71,9 @@
     flex: 0 0 250px;
     height: 250px;
     margin-top: 25px;
-    background-color: #FFD2E2
+    background-image: url('https://lh3.googleusercontent.com/proxy/TA1u2Kl-OnZDm-PmxghFol4ArgfjSOv7yS6iZkyfkwryGgc5WlTrPCnbLXELjMvD2VMWGFSEXm6jdXH-4dHv5FNF_6ELnJETHRlYv-cWTedKs6VNdEPbsVWrYJnKVDCUR0xb');
+    background-position: center;
+    background-size: cover;
   }
 
   .addPostIt {
@@ -80,24 +84,72 @@
 
   .addPostItBtn {
     padding: 10px 20px;
-    background-color: white;
+    background-color: transparent;
     border-radius: 15px;
-    font-size: 35px
+    font-size: 35px;
+    border-color: transparent;
   }
+
+  .guestBook-bottom {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .guestBook-bottom {
+    height: 10px;
+  }
+
+  .content_t {
+    display: flex;
+    /* Flex 컨테이너로 설정 */
+    justify-content: center;
+    /* 수평 가운데 정렬 */
+    align-items: center;
+    /* 수직 가운데 정렬 */
+    height: 70%;
+  }
+
+  .name_t {
+    text-align: center;
+  }
+
+  
+.editPostIt div {
+    margin-bottom: 10px; /* 입력 박스 사이의 간격을 조절 */
+    display: flex;
+    /* Flex 컨테이너로 설정 */
+    justify-content: center;
+    /* 수평 가운데 정렬 */
+    align-items: center;
+    /* 수직 가운데 정렬 */
+}
+
+.editPostIt > .input1 {
+  padding-top: 30px;
+}
+
+.editPostIt input[type="text"] {
+  margin-left: -15px;
+    width: 70%; /* 입력 박스의 너비를 부모 요소의 너비의 80%로 설정 */
+    padding: 8px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+}
 </style>
 
 <body>
+  <div class="garland">
+    <h1>
+      <img src="garland.png">
+    </h1>
+  </div>
+  <div class="guestbookText">
+    <div class="HeadText1">여기봐zoo 방명록</div>
+    <div class="text1">코드만들어팔조에게 8글자로 방명록을 남겨주세요</div>
+  </div>
   <div class="guestBook">
-
-    <div class="garland">
-      <h1>
-        <img src="garland.png">
-      </h1>
-    </div>
-    <div class="guestbookText">
-      <div class="HeadText1">여기봐zoo 방명록</div>
-      <div class="text1">코드만들어팔조에게 8글자로 방명록을 남겨주세요</div>
-    </div>
 
     <div class="guestBook-content">
 
@@ -122,12 +174,11 @@
       </div>
 
     </div>
-
-    <div class="guestBook-bottom">
-
-    </div>
+  </div>
+  <div class="guestBook-bottom">
 
   </div>
+
   <script>
     // // Firestore URL
     const endPointUrl = "https://firestore.googleapis.com/v1";
@@ -143,7 +194,7 @@
     function reloadPostIt() {
       guestBook_content.innerHTML = `<div class="addPostIt">
       <button class="addPostItBtn"
-              onclick="addPostIt()">+
+              onclick="addPostIt()">➕
       </button>
     </div>`;
       // 모든 삭제가 완료된 후에 displayAllPostIt() 함수를 호출
@@ -163,8 +214,8 @@
         <div class="viewPostIt">
           <button class="editBtn" onclick="passwordPrompt(); editPostIt('${pk}');">✏️</button>
           <button class="cancelBtn" onclick="passwordPrompt(); deletePostIt('${pk}');">🗑️</button>
-          <div><span>${content}</span></div>
-          <div>-<span>${name}</span>-</div>
+          <div class = "content_t"><span>${content}</span></div>
+          <div class = "name_t">-<span>${name}</span>-</div>
         </div>`
         guestBook_content.insertAdjacentHTML('afterbegin', template);
       })
@@ -194,7 +245,7 @@
         let addPostItForm = ` <div class="editPostIt">
       <button class="checkBtn" id="checkBtn" >✔️</button>
       <button class="cancelBtn" id="cancelBtn" onclick = "cancelConfirm()">❌</button>
-      <div><input type="text" placeholder="이름" id="name"></div>
+      <div class = "input1"><input type="text" placeholder="이름" id="name"></div>
       <div><input type="text" placeholder="비밀번호" id="password"></div>
       <div><input type="text" placeholder="내용" id="content"></div>
     </div>`;
