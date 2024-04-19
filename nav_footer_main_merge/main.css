@@ -1,0 +1,108 @@
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'ImcreSoojin';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    background-color: #FCD530;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.box {
+    background-color: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    width: 100%;
+    height: 100%;
+    transform: translateX(400%);
+    transition: transform 1.8s ease;
+}
+
+/* 박스 애니메이션  */
+.box:nth-of-type(even) {
+    transform: translateX(-400%);
+}
+
+.box.show {
+    transform: translateX(0);
+}
+/* --------------- */
+
+/* 이미지 */
+.img_L {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(8px 4px 4px #c3c3c3);
+}
+
+.img_L1 {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(8px 4px 4px #c3c3c3);
+}
+
+.img_R {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 110%;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(8px 4px 4px #c3c3c3);
+}
+
+/* --------------- */
+
+/* 텍스트 */
+.mainPic_text {
+    position: absolute;
+    top: 20%;
+    left:49%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.h1 {
+    font-family: 'ImcreSoojin';
+}
+
+.main_h1 {
+    font-family: 'ImcreSoojin';
+    font-size: 40px;
+    color: #00632C;
+}
+
+
+.p {
+    font-family: 'SUITE-Regular';
+    font-size: 20px;
+    line-height: 2.1;
+}
+/* --------------- */
