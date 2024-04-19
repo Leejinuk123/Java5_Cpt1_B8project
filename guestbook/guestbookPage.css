@@ -34,7 +34,7 @@
 .guestbookText {
     padding-top: 50px;
     padding-bottom: 50px;
-
+    
 }
 
 .grass {
@@ -55,21 +55,20 @@
 }
 
 .updatePostIt{
-  width: 284px;
-  height: 284px;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .imtext {
-  width: fit-content;
-  position: absolute;
-  top:35%;
-  z-index: 1;
-  color: black;
-  text-align: center;
-}
-.imtext input{
-  padding: 0;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    color: black;
+    text-align: center;
 }
 
 
@@ -104,7 +103,7 @@
     cursor: pointer;
     z-index: 1;
     top: 50%;
-    left: 35%;
+    left: 35%;    
 }
 
 .registeredBtn{
@@ -112,7 +111,7 @@
     cursor: pointer;
     border: 0;
     top: 18%;
-    left: 50%;
+    left: 50%;   
     /* display: none; */
 }
 
@@ -126,7 +125,7 @@
     cursor: pointer;
     border: 0;
     top: 18%;
-    left: 50%;
+    left: 50%;    
 }
 
 input {
