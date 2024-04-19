@@ -9,6 +9,7 @@
 </head>
 
 <body>
+
     <div class="guestbookBody">
         <!-- -----------------가랜드-------------------->
         <div class="garland">
@@ -28,37 +29,42 @@
 
         <!-- -----------------포스트잇-------------------->
         <container class="guestbookMain">
+
             <div class="whole">
                 <div class="pic">
-                    <!-- 업데이트폼 포스트잇 -->
-                    <div class="updatePostIt">
-                        <img src="postIt.png">
+
+                  <!-- 이미 등록된 포스트잇 -->
+                  <div class="registeredPostIt" id="registeredPostIt">
+                    <img src="postIt.png">
+                    <div class="registeredBtn">
+                      <button type="button" id="#deleteBtn" class="deleteBtn"
+                              onclick="passwordPrompt()">🗑️</button>
+                      <button type="button" class="modifyBtn" onclick="passwordPrompt()"> ✏️ </button>
+                    </div>
+                    <span class="imtext">
+                            <div><span>내용</span></div>
+                            <div><span>이름</span></div>
+                        </span>
+                  </div>
+
+                  <!-- 업데이트폼 포스트잇 -->
+                  <div class="updatePostIt">
+                      <img src="postIt.png">
+                    <div class="imtext">
+                      <input type="text" id="Name" name="Name" placeholder="이름" autocomplete="off" required>
+                      <input type="text" id="Password" name="Password" placeholder="패스워드" autocomplete="off"
+                             required>
+                      <input type="text" id="Content" name="Content" placeholder="내용" autocomplete="off" required>
+                    </div>
+
                         <div class="updateBtn">
                             <button type="button" class="registerBtn" onclick="registerConfirm()">✅</button>
                             <button type="button" class="cancelBtn" onclick="cancelConfirm()">❌</button>
                             <script src="prompt.js"></script>
                         </div>
-                        <span class="imtext">
-                            <input type="text" id="Name" name="Name" placeholder="이름" autocomplete="off" required>
-                            <input type="text" id="Password" name="Password" placeholder="패스워드" autocomplete="off"
-                                required>
-                            <input type="text" id="Content" name="Content" placeholder="내용" autocomplete="off" required>
-                        </span>
+
                     </div>
 
-                    <!-- 이미 등록된 포스트잇 -->
-                    <div class="registeredPostIt" id="registeredPostIt">
-                        <img src="postIt.png">
-                        <div class="registeredBtn">
-                            <button type="button" id="#deleteBtn" class="deleteBtn"
-                                onclick="passwordPrompt()">🗑️</button>
-                            <button type="button" class="modifyBtn" onclick="passwordPrompt()"> ✏️ </button>
-                        </div>
-                        <span class="imtext">
-                            <div><span>내용</span></div>
-                            <div><span>이름</span></div>
-                        </span>
-                    </div>
 
                     <!-- 추가버튼 포스트잇 -->
                     <div class="addPostIt">
